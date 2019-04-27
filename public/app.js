@@ -1,20 +1,21 @@
 
 $(document).on("click", "#scrap-new-articles", function() {
-  alert("and away we go!");
   // Grab the articles as a json
   $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<div class='card text-center'>");
-      $("#articles").append("<div class='card-header'>" + data[i]._id + "</div>");
+      $("#articles").append("<div class='card text-center' id='my-card'>");
       $("#articles").append("<div class='card-body'>");
       $("#articles").append("<h5 class='card-title'><a href='" + data[i].link + "'>" + data[i].title + "</a></h5>");
       $("#articles").append("<p class='card-text'>");
-      $("#articles").append("<a href='#' class='btn btn-primary'>Delete article</a>");
+      $("#articles").append("<a id='" + data[i]._id + "' href='#' class='btn btn-primary my-card-buttons'>Save Article</a>");
+      $("#articles").append("</p>");
       $("#articles").append("</div>");
       $("#articles").append("<div class='card-footer text-muted'>2 days ago</div>");
       $("#articles").append("</div>");
+      $("#articles").append("<br>");
+      $("#articles").append("<br>");
       // $("#articles").append("<p data-id='" + data[i]._id + "'>" +  + "<br />" + data[i].link + "</p>");
     }
   });
