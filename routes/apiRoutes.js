@@ -12,8 +12,8 @@ app.get("/scrape", function(req, res) {
   axios.get(scrapeURL).then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
     // Delete all non-saved articles before adding scraped articles to the DB
-    // db.Article.deleteMany({saved: false})
-    db.Article.deleteMany({})
+    // db.Article.deleteMany({})
+    db.Article.deleteMany({saved: false})
       .then(function(removeResult) {
         console.log(removeResult);
         var $ = cheerio.load(response.data);
