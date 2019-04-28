@@ -12,47 +12,48 @@ app.get("/scrape", function(req, res) {
   axios.get(scrapeURL).then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
     // Delete all non-saved articles before adding scraped articles to the DB
-    db.Article.deleteMany({saved: false}).
-    then(function(removeResult) {
-      console.log(removeResult);
-    var $ = cheerio.load(response.data);
-    var numArticles = 0;
-    $("article h2").each(function(i, element) {
-      // Save an empty result object
-      var result = {};
+    // db.Article.deleteMany({saved: false}).
+    db.Article.deleteMany({})
+      .then(function(removeResult) {
+        console.log(removeResult);
+        var $ = cheerio.load(response.data);
+        var numArticles = 0;
+        $("article h2").each(function(i, element) {
+          // Save an empty result object
+          var result = {};
 
-      // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = newsURL + $(this)
-        .children("a")
-        .attr("href");
-      result.saved = false;
+          // Add the text and href of every link, and save them as properties of the result object
+          result.title = $(this)
+            .children("a")
+            .text();
+          result.link = newsURL + $(this)
+            .children("a")
+            .attr("href");
+          result.saved = false;
 
-      // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          // dbArticles.push(dbArticle);
-          numArticles++;
-          if (numArticles===$("article h2").length) {
-            console.log(result.link);
-            db.Article.find({}).then(function(queryResults) {
-              // console.log("Rendering a bunch of articles=" + dbArticles.length);
-              // console.log("queryResults=" + queryResults);
-              // res.json(queryResults);
-              res.render("scrapedArticles", { articles: queryResults });
+          // Create a new Article using the `result` object built from scraping
+          db.Article.create(result)
+            .then(function(dbArticle) {
+              // View the added result in the console
+              // dbArticles.push(dbArticle);
+              numArticles++;
+              if (numArticles===$("article h2").length) {
+                console.log(result.link);
+                db.Article.find({}).then(function(queryResults) {
+                  // console.log("Rendering a bunch of articles=" + dbArticles.length);
+                  // console.log("queryResults=" + queryResults);
+                  // res.json(queryResults);
+                  res.render("scrapedArticles", { articles: queryResults });
+                });
+                // res.render("index", {articles: dbArticles});
+                // res.json(dbArticles);
+              }
+            })
+            .catch(function(err) {
+              // If an error occurred, log it
+              console.log(err);
             });
-            // res.render("index", {articles: dbArticles});
-            // res.json(dbArticles);
-          }
-        })
-        .catch(function(err) {
-          // If an error occurred, log it
-          console.log(err);
         });
-    });
   });
 
     // Send a message to the client
