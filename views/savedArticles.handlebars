@@ -1,45 +1,40 @@
-  {{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">News Article Scraper</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" id="saved-articles" href="#" >Saved Articles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="scrape-new-articles" style="color: red">SCRAPE NEW ARTICLES!</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>   --}}
-
-    <div id="wrapper">
-      <h1 style="text-align: center">Your Saved Articles</h1>
-      <div id="articles">
-        {{#each articles}}
-          <div class="card text-center" id="my-card">
-            <div class="card-body">
-              <h5 class='card-title'>
-                <a href="{{this.link}}">{{this.title}}</a>
-              </h5>
-              <p class="card-text">
-                <button data-id="{{this._id}}" class="btn btn-primary my-card-save-buttons">Save Article</button>
-              </p>
-            </div>
-          <div class="card-footer text-muted">2 days ago</div>
+<div id="wrapper">
+    <h1 style="text-align: center">Your Saved Articles</h1>
+    <div id="articles">
+    {{#each articles}}
+        <div class="card text-center" id="my-card">
+        <div class="card-body">
+            <h5 class='card-title'>
+            <a href="{{this.link}}">{{this.title}}</a>
+            </h5>
+            <p class="card-text">
+            <button data-id="{{this._id}}" class="btn btn-primary my-card-add-note-buttons" data-toggle="modal" data-target="#exampleModal">Add note</button>
+            <button data-id="{{this._id}}" class="btn btn-primary my-card-delete-buttons">Delete Article</button>
+            </p>
         </div>
-        {{/each}}
-      </div>
-      <div id="notes"></div>
+        <div class="card-footer text-muted">2 days ago</div>
     </div>
+    {{/each}}
+    </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/index.js"></script>

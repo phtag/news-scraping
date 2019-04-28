@@ -1,5 +1,10 @@
 
 var executingClickEvent = false;
+$(document).on('click', '.my-card-add-note-buttons', function (event) {
+  alert("Chankerwood");
+  $('#exampleModal').modal({show: true});
+})
+
 $(document).on("click", "#scrape-new-articles", function() {
   if (!executingClickEvent) {
     executingClickEvent= true;
