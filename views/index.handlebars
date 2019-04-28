@@ -9,10 +9,10 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" >Saved Articles</a>
+          <a class="nav-link" id="saved-articles" href="#" >Saved Articles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" id="scrap-new-articles" style="color: red">SCRAPE NEW ARTICLES!</a>
+          <a class="nav-link" href="#" id="scrape-new-articles" style="color: red">SCRAPE NEW ARTICLES!</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -22,10 +22,8 @@
     </div>
   </nav>  <body>
     <div id="wrapper">
-      <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no FUNCTIONAL PROBLEM.</i></h2>
+      <h1 style="text-align: center">New York Times Scraper</h1>
       <div id="articles">
-        SELL BUCKETS TODAY
         {{#each articles}}
           <div class="card text-center" id="my-card">
             <div class="card-body">
@@ -33,7 +31,7 @@
                 <a href="{{this.link}}">{{this.title}}</a>
               </h5>
               <p class="card-text">
-                <a data-id="{{this._id}}" href='#' class="btn btn-primary my-card-save-buttons">Save Article</a>
+                <button data-id="{{this._id}}" class="btn btn-primary my-card-save-buttons">Save Article</button>
               </p>
             </div>
           <div class="card-footer text-muted">2 days ago</div>

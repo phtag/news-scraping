@@ -1,5 +1,6 @@
 
-$(document).on("click", "#scrap-new-articles", function() {
+var savingArticle = false;
+$(document).on("click", "#scrape-new-articles", function() {
   alert("Scraping");
 
   // Grab the articles as a json
@@ -12,59 +13,64 @@ $(document).on("click", "#scrap-new-articles", function() {
     alert("Placknard");
     // event.preventDefault();
     $("body").html(data);
-    // $.getJSON("/articles", function(data) {
-    //   alert("Howdy friends. data.length=" + data.length);
-        // For each one
-      // for (var i = 0; i < data.length; i++) {
-      //   // Display the apropos information on the page
-      //   $("#articles").append("<div class='card text-center' id='my-card'>");
-      //   $("#articles").append("<div class='card-body'>");
-      //   $("#articles").append("<h5 class='card-title'><a href='" + data[i].link + "'>" + data[i].title + "</a></h5>");
-      //   $("#articles").append("<p class='card-text'>");
-      //   $("#articles").append("<a data-id='" + data[i]._id + "' href='#' class='btn btn-primary my-card-save-buttons'>Save Article</a>");
-      //   $("#articles").append("</p>");
-      //   $("#articles").append("</div>");
-      //   $("#articles").append("<div class='card-footer text-muted'>2 days ago</div>");
-      //   $("#articles").append("</div>");
-      //   $("#articles").append("<br>");
-      //   $("#articles").append("<br>");
-      //   // $("#articles").append("<p data-id='" + data[i]._id + "'>" +  + "<br />" + data[i].link + "</p>");
-      // }
+  });
+});
+
+$(document).on("click", "#saved-articles", function() {
+  alert("Getting saved articles");
+
+  // Grab the articles as a json
+  // $.getJSON("/scrape", function(data) {
+    $.ajax({
+      method: "GET",
+      url: "/savedArticles/"
+    }).then(function(data) {
+    console.log(data);
+    alert("Saved articles");
+    // event.preventDefault();
+    $("body").html(data);
   });
 });
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
-  // Empty the notes from the note section
-  $("#notes").empty();
-  // Save the id from the p tag
-  var thisId = $(this).attr("data-id");
+$(document).on("click", ".my-card-save-buttons", function(event) {
+  event.preventDefault();
+  if (!savingArticle) {
+    savingArticle = true; // for reasons I don't understand, the button click eventis fired twice
+    // Empty the notes from the note section
+    // $("#notes").empty();
+    // Save the id from the p tag
+    var thisId = $(this).attr("data-id");
+    alert("data-id=" + thisId);
 
-  // Now make an ajax call for the Article
-  $.ajax({
-    method: "GET",
-    url: "/articles/" + thisId
-  })
-    // With that done, add the note information to the page
-    .then(function(data) {
-      console.log(data);
-      // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
-      // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+    // Now make an ajax call for the Article
+    $.ajax({
+      method: "GET",
+      url: "/articles/" + thisId
+    })
+      // With that done, add the note information to the page
+      .then(function(data) {
+        alert("Results");
+        console.log(data);
+        savingArticle = false;
+        // // The title of the article
+        // $("#notes").append("<h2>" + data.title + "</h2>");
+        // // An input to enter a new title
+        // $("#notes").append("<input id='titleinput' name='title' >");
+        // // A textarea to add a new note body
+        // $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+        // // A button to submit a new note, with the id of the article saved to it
+        // $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
-      // If there's a note in the article
-      if (data.note) {
-        // Place the title of the note in the title input
-        $("#titleinput").val(data.note.title);
-        // Place the body of the note in the body textarea
-        $("#bodyinput").val(data.note.body);
-      }
-    });
+        // // If there's a note in the article
+        // if (data.note) {
+        //   // Place the title of the note in the title input
+        //   $("#titleinput").val(data.note.title);
+        //   // Place the body of the note in the body textarea
+        //   $("#bodyinput").val(data.note.body);
+        // }
+      });
+  }
 });
 
 // When you click the savenote button
