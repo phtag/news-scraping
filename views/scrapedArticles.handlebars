@@ -5,13 +5,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" id="home-page" href="#">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="saved-articles" href="#" >Saved Articles</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="#" id="scrape-new-articles" style="color: red">SCRAPE NEW ARTICLES!</a>
         </li>
       </ul>
@@ -20,9 +20,9 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
-  </nav>  <body> --}}
+  </nav> --}}
     <div id="wrapper">
-      <h1 style="text-align: center">New York Times Article Scraper</h1>
+      <h1 style="text-align: center">Newly Scraped Articles From The New York Times</h1>
       <div id="articles">
         {{#each articles}}
           <div class="card text-center" id="my-card">

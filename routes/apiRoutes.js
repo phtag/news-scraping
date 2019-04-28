@@ -11,7 +11,10 @@ app.get("/scrape", function(req, res) {
   // axios.get("http://www.echojs.com/").then(function(response) {
   axios.get(scrapeURL).then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
-    // console.log(response.data);
+    // Delete all non-saved articles before adding scraped articles to the DB
+    db.Article.deleteMany({saved: false}).
+    then(function(removeResult) {
+      console.log(removeResult);
     var $ = cheerio.load(response.data);
     var numArticles = 0;
     $("article h2").each(function(i, element) {
@@ -39,7 +42,7 @@ app.get("/scrape", function(req, res) {
               // console.log("Rendering a bunch of articles=" + dbArticles.length);
               // console.log("queryResults=" + queryResults);
               // res.json(queryResults);
-              res.render("index", { articles: queryResults });
+              res.render("scrapedArticles", { articles: queryResults });
             });
             // res.render("index", {articles: dbArticles});
             // res.json(dbArticles);
@@ -50,6 +53,7 @@ app.get("/scrape", function(req, res) {
           console.log(err);
         });
     });
+  });
 
     // Send a message to the client
     // res.send("Scrape Complete");
@@ -73,11 +77,11 @@ app.get("/articles", function(req, res) {
 
 // Route for getting saved Articles from the db
 app.get("/savedArticles", function(req, res) {
-  // Grab every document in the Articles collection
+  // Grab documents in the Articles collection that have been saved
   db.Article.find({saved: true})
     .then(function(queryResults) {
       // If we were able to successfully find Articles, send them back to the client
-      res.render("index", { articles: queryResults });
+      res.render("savedArticles", { articles: queryResults });
       // res.json(dbArticle);
     })
     .catch(function(err) {
@@ -86,6 +90,18 @@ app.get("/savedArticles", function(req, res) {
     });
 });
 
+app.get("/scrapedCount", function(req, res) {
+  // Count of all scraped, but unsaved documents in the Articles collection
+  db.Article.find({saved: false})
+    .then(function(queryResults) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.json(queryResults);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
 
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
@@ -121,6 +137,20 @@ app.post("/articles/:id", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
-});
+  });
 
+  app.post("/saveArticle/:id", function(req, res) {
+    // Flag the article as being saved
+    console.log("Marking article as saved for id=" + req.params.id);
+    db.Article.updateOne({_id: req.params.id}, {$set: {saved: true}})
+      .then(function(result) {
+        // If we were able to successfully update an Article, send it back to the client
+        res.json(result);
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+    });
+  
 };
