@@ -1,25 +1,37 @@
 
 $(document).on("click", "#scrap-new-articles", function() {
+  alert("Scraping");
+
   // Grab the articles as a json
-  $.getJSON("/articles", function(data) {
-    // For each one
-    for (var i = 0; i < data.length; i++) {
-      // Display the apropos information on the page
-      $("#articles").append("<div class='card text-center' id='my-card'>");
-      $("#articles").append("<div class='card-body'>");
-      $("#articles").append("<h5 class='card-title'><a href='" + data[i].link + "'>" + data[i].title + "</a></h5>");
-      $("#articles").append("<p class='card-text'>");
-      $("#articles").append("<a id='" + data[i]._id + "' href='#' class='btn btn-primary my-card-buttons'>Save Article</a>");
-      $("#articles").append("</p>");
-      $("#articles").append("</div>");
-      $("#articles").append("<div class='card-footer text-muted'>2 days ago</div>");
-      $("#articles").append("</div>");
-      $("#articles").append("<br>");
-      $("#articles").append("<br>");
-      // $("#articles").append("<p data-id='" + data[i]._id + "'>" +  + "<br />" + data[i].link + "</p>");
-    }
+  // $.getJSON("/scrape", function(data) {
+    $.ajax({
+      method: "GET",
+      url: "/scrape/"
+    }).then(function(data) {
+    console.log(data);
+    alert("Placknard");
+    // event.preventDefault();
+    $("body").html(data);
+    // $.getJSON("/articles", function(data) {
+    //   alert("Howdy friends. data.length=" + data.length);
+        // For each one
+      // for (var i = 0; i < data.length; i++) {
+      //   // Display the apropos information on the page
+      //   $("#articles").append("<div class='card text-center' id='my-card'>");
+      //   $("#articles").append("<div class='card-body'>");
+      //   $("#articles").append("<h5 class='card-title'><a href='" + data[i].link + "'>" + data[i].title + "</a></h5>");
+      //   $("#articles").append("<p class='card-text'>");
+      //   $("#articles").append("<a data-id='" + data[i]._id + "' href='#' class='btn btn-primary my-card-save-buttons'>Save Article</a>");
+      //   $("#articles").append("</p>");
+      //   $("#articles").append("</div>");
+      //   $("#articles").append("<div class='card-footer text-muted'>2 days ago</div>");
+      //   $("#articles").append("</div>");
+      //   $("#articles").append("<br>");
+      //   $("#articles").append("<br>");
+      //   // $("#articles").append("<p data-id='" + data[i]._id + "'>" +  + "<br />" + data[i].link + "</p>");
+      // }
   });
-})
+});
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
