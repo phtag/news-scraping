@@ -33,7 +33,8 @@ app.get("/scrape", function(req, res) {
           dbArticles.push(dbArticle);
           if (dbArticles.length===$("article h2").length) {
             db.Article.find({}).then(function(queryResults) {
-              console.log("Rendering articles=" + dbArticles.length);
+              console.log("Rendering a bunch of articles=" + dbArticles.length);
+              console.log("queryResults=" + queryResults);
               // res.json(queryResults);
               res.render("index", { articles: queryResults });
             });
