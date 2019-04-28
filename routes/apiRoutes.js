@@ -7,14 +7,15 @@ module.exports = function(app) {
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
   var dbArticles = [];
-  axios.get("http://www.echojs.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
-    console.log("$('article h2').length=" + $("article h2").length);
-
+  // axios.get("http://www.echojs.com/").then(function(response) {
+  axios.get("https://www.nytimes.com/section/world").then(function(response) {
+      // Then, we load that into cheerio and save it to $ for a shorthand selector
+    // console.log(response.data);
+      var $ = cheerio.load(response.data);
     // Now, we grab every h2 within an article tag, and do the following:
     $("article h2").each(function(i, element) {
-      // Save an empty result object
+      // $("div.story-body").each(function(i, element) {
+        // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
@@ -33,8 +34,8 @@ app.get("/scrape", function(req, res) {
           dbArticles.push(dbArticle);
           if (dbArticles.length===$("article h2").length) {
             db.Article.find({}).then(function(queryResults) {
-              console.log("Rendering a bunch of articles=" + dbArticles.length);
-              console.log("queryResults=" + queryResults);
+              // console.log("Rendering a bunch of articles=" + dbArticles.length);
+              // console.log("queryResults=" + queryResults);
               // res.json(queryResults);
               res.render("index", { articles: queryResults });
             });
