@@ -153,5 +153,18 @@ app.post("/articles/:id", function(req, res) {
         res.json(err);
       });
     });
-  
+
+    app.post("/deleteArticle/:id", function(req, res) {
+      // Delete the article from the database
+      console.log("Deleting article with id=" + req.params.id);
+      db.Article.remove({_id: req.params.id})
+        .then(function(result) {
+          // If we were able to successfully remove an Article, send it back to the client
+          res.json(result);
+        })
+        .catch(function(err) {
+          // If an error occurred, send it to the client
+          res.json(err);
+        });
+      });
 };
