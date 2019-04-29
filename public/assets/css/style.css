@@ -1,3 +1,6 @@
+body {
+    background-image: url("../images/cup-3488805_1920.jpg");
+}
 .my-card-button {
     margin: 10px;
     color: red;
@@ -19,4 +22,10 @@
   }
   .form-button {
       float:right;
+  }
+
+  #my-card {
+      width: 80%;
+      margin-top: 30px;
+      margin-left: 10%;
   }

@@ -1,5 +1,5 @@
 <div id="wrapper">
-    <h1 style="text-align: center">Your Saved Articles</h1>
+    <h1 style="color: white; text-align: center">Your Saved Articles</h1>
     <div id="articles">
     {{#each articles}}
         <div class="card text-center" id="my-card">
@@ -12,7 +12,7 @@
             <button type="button" data-id="{{this._id}}" class="btn btn-primary my-card-delete-note-buttons">Delete Article</button>
             </p>
         </div>
-        <div class="card-footer text-muted">2 days ago</div>
+        {{!-- <div class="card-footer text-muted">2 days ago</div> --}}
     </div>
     {{/each}}
     </div>

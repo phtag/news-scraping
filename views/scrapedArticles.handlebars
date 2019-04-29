@@ -1,6 +1,6 @@
 
 <div id="wrapper">
-      <h1 style="text-align: center">Newly Scraped Articles From The New York Times</h1>
+      <h1 style="color: white; text-align: center">Newly Scraped Articles From The New York Times</h1>
       <div id="articles">
         {{#each articles}}
           <div class="card text-center" id="my-card">
@@ -12,7 +12,7 @@
                 <button data-id="{{this._id}}" class="btn btn-primary my-card-save-buttons">Save Article</button>
               </p>
             </div>
-          <div class="card-footer text-muted">2 days ago</div>
+          {{!-- <div class="card-footer text-muted">2 days ago</div> --}}
         </div>
         {{/each}}
       </div>
