@@ -8,33 +8,24 @@
             <a href="{{this.link}}">{{this.title}}</a>
             </h5>
             <p class="card-text">
-            <button data-id="{{this._id}}" class="btn btn-primary my-card-add-note-buttons" data-toggle="modal" data-target="#exampleModal">Add note</button>
-            <button data-id="{{this._id}}" class="btn btn-primary my-card-delete-buttons">Delete Article</button>
+            <button type="button" data-id="{{this._id}}" class="btn btn-primary my-card-add-note-buttons" data-toggle="modal" data-target="#exampleModal">Add note</button>
+            <button type="button" data-id="{{this._id}}" class="btn btn-primary my-card-delete-buttons">Delete Article</button>
             </p>
         </div>
         <div class="card-footer text-muted">2 days ago</div>
     </div>
     {{/each}}
     </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
+<div class="form-popup" id="myForm">
+  <form class="form-container">
+    <h1>Login</h1>
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
 </div>
-</div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/js/index.js"></script>
