@@ -22,8 +22,8 @@ $(document).on('click', '.my-card-add-note-buttons', function (event) {
           $("#note-title").val(data.note.title);
           // Place the body of the note in the body textarea
           $("#note-text").val(data.note.body);
-          executingClickEvent = false;
         }
+        executingClickEvent = false;
       });
     }
 })
