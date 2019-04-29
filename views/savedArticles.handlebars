@@ -22,14 +22,17 @@
     <label for="note-id"><b>Note ID:</b></label>
     <input type="text" style="width: 100%" id="note-id" name="note-id" readonly>
     <br>
-    <label for="title"><b>Title:</b></label>
-    <input id="note-title" style="width: 100%" name='title' readonly>
+    <label for="article-title"><b>Article Title:</b></label>
+    <input id="article-title" style="width: 100%" name='article-title' readonly>
+    <br>
+    <label for="title"><b>Note Title:</b></label>
+    <input id="note-title" style="width: 100%" name='title'>
     <br>
     <label for="body"><b>Text:</b></label>
     <br>
     <textarea id="note-text" rows="10" style="width: 100%" name="body"></textarea>
     <br>
-    <button type="button" class="btn">Add note</button>
+    <button type="button" onclick="saveNote()" class="btn">Add note</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
