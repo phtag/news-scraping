@@ -19,6 +19,9 @@ Go to this page to scrape the latest articles on the New York Times web page
 
 Go to this page to manage saved articles. Notes can be added to saved articles and articles can be deleted from the saved list.
 
+![Login page Screenshot](/public/assets/images/new-york-times-article-add-note-screenshot.jpg)
+
+
 NOTE: This project is referenced on my portfolio page at [my portfolio](https://phtag.github.io/Updated-portfolio/)
 
 
