@@ -10,7 +10,7 @@ This project uses several full stack NPM packages to perform web scraping of a n
 
 ### Home page
 
-![Login page Screenshot](/images/new-york-times-article-scraper-screenshot.jpg)
+![Login page Screenshot](/public/assets/images/new-york-times-article-scraper-screenshot.jpg)
 
 ### Scrape new articles page
 Go to this page to scrape the latest articles on the New York Times web page
