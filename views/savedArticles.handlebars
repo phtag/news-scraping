@@ -18,14 +18,18 @@
     </div>
 <div class="form-popup" id="myForm">
   <form class="form-container">
-    <h1>Login</h1>
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit" class="btn">Login</button>
+    <h3>Article Note</h3>
+    <label for="note-id"><b>Note ID:</b></label>
+    <input type="text" style="width: 100%" id="note-id" name="note-id" readonly>
+    <br>
+    <label for="title"><b>Title:</b></label>
+    <input id="note-title" style="width: 100%" name='title' readonly>
+    <br>
+    <label for="body"><b>Text:</b></label>
+    <br>
+    <textarea id="note-text" rows="10" style="width: 100%" name="body"></textarea>
+    <br>
+    <button type="button" class="btn">Add note</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
